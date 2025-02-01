@@ -12,6 +12,12 @@ on:
         required: true
         default: "warning"
 
+env:
+  APP_ID: ${{ secrets.APP_ID }}
+  APP_SECRET: ${{ secrets.APP_SECRET }}
+  TEST: ${{ secrets.TEST }}
+  TEST2: "123123123123123"
+
 jobs:
   flutter-build-macos:
     name: "Build MacOS"
@@ -31,18 +37,9 @@ jobs:
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache of dart pub get dependencies
           pub-cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
       - run: echo $TEST
-        env:
-          APP_ID: ${{ secrets.APP_ID }}
-          APP_SECRET: ${{ secrets.APP_SECRET }}
-          TEST: ${{ secrets.TEST }}
-          TEST2: "123123123123123"
       - run: echo $TEST2
-        env:
-          APP_ID: ${{ secrets.APP_ID }}
-          APP_SECRET: ${{ secrets.APP_SECRET }}
-          TEST: ${{ secrets.TEST }}
-          TEST2: "123123123123123"
-      - run: echo $TEST2
+      - run: python -c "import os; print(os.environ.get('TEST'))"
+      - run: python -c "import os; print(os.environ.get('TEST2'))"
       - run: flutter pub get
       - run: flutter build macos --release --verbose
       - run: mkdir upload
