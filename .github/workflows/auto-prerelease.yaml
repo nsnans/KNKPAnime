@@ -38,8 +38,9 @@ jobs:
           pub-cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
       - run: echo $TEST
       - run: echo $TEST2
-      - run: python -c "import os; print(os.environ.get('TEST'))"
-      - run: python -c "import os; print(os.environ.get('TEST2'))"
+      - run: python -c "import os; print(os.environ.get('TEST')[:5])"
+      - run: python -c "import os; print(os.environ.get('TEST2')[:5])"
+      - run: python -c "import os; print(os.environ.get('APP_SECRET')[:5])"
       - run: flutter pub get
       - run: flutter build macos --release --verbose
       - run: mkdir upload
