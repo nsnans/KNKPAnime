@@ -16,6 +16,7 @@ env:
   APP_ID: ${{ secrets.APP_ID }}
   APP_SECRET: ${{ secrets.APP_SECRET }}
   TEST: ${{ secrets.APP_TEST }}
+  TEST2: "123123123123123"
 
 jobs:
   flutter-build-macos:
