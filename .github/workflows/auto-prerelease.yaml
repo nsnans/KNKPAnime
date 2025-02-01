@@ -15,6 +15,7 @@ on:
 env:
   APP_ID: ${{ secrets.APP_ID }}
   APP_SECRET: ${{ secrets.APP_SECRET }}
+  TEST: ${{ secrets.APP_TEST }}
 
 jobs:
   flutter-build-macos:
@@ -39,6 +40,7 @@ jobs:
       - run: mkdir upload
       - run: mv build/macos/Build/Products/Release/knkpanime.app upload/knkpanime-macOS.app
       - run: ls
+      - run: echo $TEST
       - name: Upload MacOS build
         uses: actions/upload-artifact@v4
         with:
@@ -69,6 +71,7 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "18"
+      - run: echo $TEST
       - run: flutter pub get
       - run: flutter build apk
       - run: flutter build windows
