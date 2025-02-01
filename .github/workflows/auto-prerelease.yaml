@@ -36,12 +36,12 @@ jobs:
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache of dart pub get dependencies
           pub-cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
+      - run: echo $TEST
       - run: flutter pub get
       - run: flutter build macos --release --verbose
       - run: mkdir upload
       - run: mv build/macos/Build/Products/Release/knkpanime.app upload/knkpanime-macOS.app
       - run: ls
-      - run: echo $TEST
       - name: Upload MacOS build
         uses: actions/upload-artifact@v4
         with:
