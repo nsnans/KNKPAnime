@@ -15,8 +15,6 @@ on:
 env:
   APP_ID: ${{ secrets.APP_ID }}
   APP_SECRET: ${{ secrets.APP_SECRET }}
-  TEST: ${{ secrets.TEST }}
-  TEST2: "123123123123123"
 
 jobs:
   flutter-build-macos:
@@ -36,11 +34,6 @@ jobs:
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache of dart pub get dependencies
           pub-cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
-      - run: echo $TEST
-      - run: echo $TEST2
-      - run: python -c "import os; print(os.environ.get('TEST')[:5])"
-      - run: python -c "import os; print(os.environ.get('TEST2')[:5])"
-      - run: python -c "import os; print(os.environ.get('APP_SECRET')[:5])"
       - run: flutter pub get
       - run: flutter build macos --release --verbose
       - run: mkdir upload
@@ -61,8 +54,6 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v4
       - run: git config --system core.longpaths true # to avoid file name too long error
-      - run: echo $TEST
-      - run: echo $TEST2
       - run: choco install yq
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -78,7 +69,6 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "18"
-      - run: echo $TEST
       - run: flutter pub get
       - run: flutter build apk
       - run: flutter build windows
